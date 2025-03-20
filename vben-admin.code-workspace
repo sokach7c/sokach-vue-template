@@ -13,12 +13,12 @@
       "path": "apps/web-ele",
     },
     {
-      "name": "@vben/web-naive",
-      "path": "apps/web-naive",
+      "name": "@vben/web-example",
+      "path": "apps/web-example",
     },
     {
-      "name": "@vben/docs",
-      "path": "docs",
+      "name": "@vben/web-naive",
+      "path": "apps/web-naive",
     },
     {
       "name": "@vben/commitlint-config",

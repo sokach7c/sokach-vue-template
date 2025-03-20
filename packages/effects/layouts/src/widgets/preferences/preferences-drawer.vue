@@ -93,12 +93,17 @@ const sidebarCollapsedShowTitle = defineModel<boolean>(
 const sidebarAutoActivateChild = defineModel<boolean>(
   'sidebarAutoActivateChild',
 );
-const SidebarExpandOnHover = defineModel<boolean>('sidebarExpandOnHover');
+const sidebarExpandOnHover = defineModel<boolean>('sidebarExpandOnHover');
+const sidebarShowCollapseButton = defineModel<boolean>(
+  'sidebarShowCollapseButton',
+);
+const sidebarShowFixedButton = defineModel<boolean>('sidebarShowFixedButton');
 
 const headerEnable = defineModel<boolean>('headerEnable');
 const headerMode = defineModel<LayoutHeaderModeType>('headerMode');
 const headerMenuAlign =
   defineModel<LayoutHeaderMenuAlignType>('headerMenuAlign');
+const headerHeight = defineModel<number>('headerHeight');
 
 const breadcrumbEnable = defineModel<boolean>('breadcrumbEnable');
 const breadcrumbShowIcon = defineModel<boolean>('breadcrumbShowIcon');
@@ -317,8 +322,10 @@ async function handleReset() {
                 v-model:sidebar-collapsed="sidebarCollapsed"
                 v-model:sidebar-collapsed-show-title="sidebarCollapsedShowTitle"
                 v-model:sidebar-enable="sidebarEnable"
-                v-model:sidebar-expand-on-hover="SidebarExpandOnHover"
+                v-model:sidebar-expand-on-hover="sidebarExpandOnHover"
                 v-model:sidebar-width="sidebarWidth"
+                v-model:sidebar-show-collapse-button="sidebarShowCollapseButton"
+                v-model:sidebar-show-fixed-button="sidebarShowFixedButton"
                 :current-layout="appLayout"
                 :disabled="!isSideMode"
               />
@@ -329,6 +336,7 @@ async function handleReset() {
                 v-model:header-enable="headerEnable"
                 v-model:header-menu-align="headerMenuAlign"
                 v-model:header-mode="headerMode"
+                v-model:header-height="headerHeight"
                 :disabled="isFullContent"
               />
             </Block>

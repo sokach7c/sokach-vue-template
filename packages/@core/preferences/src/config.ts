@@ -45,6 +45,7 @@ const defaultPreferences: Preferences = {
   },
   header: {
     enable: true,
+    height: 50,
     hidden: false,
     menuAlign: 'start',
     mode: 'fixed',
@@ -73,6 +74,8 @@ const defaultPreferences: Preferences = {
     expandOnHover: true,
     extraCollapse: false,
     hidden: false,
+    showCollapseButton: true,
+    showFixedButton: true,
     width: 224,
   },
   tabbar: {

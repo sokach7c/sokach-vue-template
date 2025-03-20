@@ -9,6 +9,7 @@ import {
   SCROLL_FIXED_CLASS,
   useLayoutFooterStyle,
   useLayoutHeaderStyle,
+  useNamespace,
 } from '@vben-core/composables';
 import { Menu } from '@vben-core/icons';
 import { VbenIconButton } from '@vben-core/shadcn-ui';
@@ -53,6 +54,8 @@ const props = withDefaults(defineProps<Props>(), {
   sidebarExtraCollapsedWidth: 60,
   sidebarHidden: false,
   sidebarMixedWidth: 80,
+  sidebarShowCollapseButton: true,
+  sidebarShowFixedButton: true,
   sidebarTheme: 'dark',
   sidebarWidth: 180,
   sideCollapseWidth: 60,
@@ -62,6 +65,8 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{ sideMouseLeave: []; toggleSidebar: [] }>();
+
+const { b } = useNamespace('layout');
 const sidebarCollapse = defineModel<boolean>('sidebarCollapse', {
   default: false,
 });
@@ -479,7 +484,7 @@ const idMainContent = ELEMENT_ID_MAIN_CONTENT;
 </script>
 
 <template>
-  <div class="relative flex min-h-full w-full">
+  <div class="relative flex min-h-full w-full" :class="b()">
     <LayoutSidebar
       v-if="sidebarEnableState"
       v-model:collapse="sidebarCollapse"
@@ -496,6 +501,8 @@ const idMainContent = ELEMENT_ID_MAIN_CONTENT;
       :margin-top="sidebarMarginTop"
       :mixed-width="sidebarMixedWidth"
       :show="showSidebar"
+      :show-collapse-button="sidebarShowCollapseButton"
+      :show-fixed-button="sidebarShowFixedButton"
       :theme="sidebarTheme"
       :width="getSidebarWidth"
       :z-index="sidebarZIndex"
@@ -510,6 +517,13 @@ const idMainContent = ELEMENT_ID_MAIN_CONTENT;
       </template>
       <template v-else>
         <slot name="menu"></slot>
+      </template>
+
+      <template #sidebar-top>
+        <slot name="sidebar-top"></slot>
+      </template>
+      <template #sidebar-bottom>
+        <slot name="sidebar-bottom"></slot>
       </template>
 
       <template #extra>
@@ -530,6 +544,7 @@ const idMainContent = ELEMENT_ID_MAIN_CONTENT;
             'shadow-[0_16px_24px_hsl(var(--background))]': scrollY > 20,
           },
           SCROLL_FIXED_CLASS,
+          b('header'),
         ]"
         :style="headerWrapperStyle"
         class="overflow-hidden transition-all duration-200"
@@ -582,6 +597,7 @@ const idMainContent = ELEMENT_ID_MAIN_CONTENT;
         :padding-top="contentPaddingTop"
         :style="contentStyle"
         class="transition-[margin-top] duration-200"
+        :class="b('content')"
       >
         <slot name="content"></slot>
 

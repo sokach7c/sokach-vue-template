@@ -18,6 +18,12 @@ const sidebarAutoActivateChild = defineModel<boolean>(
 );
 const sidebarCollapsed = defineModel<boolean>('sidebarCollapsed');
 const sidebarExpandOnHover = defineModel<boolean>('sidebarExpandOnHover');
+
+// 自定义，控制侧边栏按钮
+const sidebarShowCollapseButton = defineModel<boolean>(
+  'sidebarShowCollapseButton',
+);
+const sidebarShowFixedButton = defineModel<boolean>('sidebarShowFixedButton');
 </script>
 
 <template>
@@ -62,4 +68,16 @@ const sidebarExpandOnHover = defineModel<boolean>('sidebarExpandOnHover');
   >
     {{ $t('preferences.sidebar.width') }}
   </NumberFieldItem>
+  <SwitchItem
+    v-model="sidebarShowCollapseButton"
+    :disabled="!sidebarEnable || disabled"
+  >
+    {{ $t('preferences.sidebar.showCollapseButton') }}
+  </SwitchItem>
+  <SwitchItem
+    v-model="sidebarShowFixedButton"
+    :disabled="!sidebarEnable || disabled"
+  >
+    {{ $t('preferences.sidebar.showFixedButton') }}
+  </SwitchItem>
 </template>

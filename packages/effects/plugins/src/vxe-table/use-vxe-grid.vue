@@ -184,7 +184,7 @@ const options = computed(() => {
       {},
       mergedOptions.pagerConfig,
       {
-        pageSize: 20,
+        pageSize: 10,
         background: true,
         pageSizes: [10, 20, 30, 50, 100, 200],
         className: 'mt-2 w-full',
@@ -400,7 +400,7 @@ onUnmounted(() => {
             </Form>
           </slot>
           <div
-            class="bg-background-deep z-100 absolute -left-2 bottom-1 h-2 w-[calc(100%+1rem)] overflow-hidden md:bottom-2 md:h-3"
+            class="bg-background-deep z-100 absolute -left-2 bottom-1 h-2 w-full overflow-hidden md:bottom-2 md:h-3"
           ></div>
         </div>
       </template>

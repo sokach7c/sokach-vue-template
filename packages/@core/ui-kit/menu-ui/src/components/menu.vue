@@ -401,11 +401,12 @@ $namespace: vben;
     transition: transform 0.25s;
   }
 
-  &:hover {
-    .#{$namespace}-menu__icon {
-      transform: scale(1.2);
-    }
-  }
+  // 鼠标悬停时，图标放大
+  // &:hover {
+  //   .#{$namespace}-menu__icon {
+  //     transform: scale(1.2);
+  //   }
+  // }
 
   &:hover,
   &:focus {

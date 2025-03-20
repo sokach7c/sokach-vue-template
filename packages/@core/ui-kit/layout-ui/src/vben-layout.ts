@@ -132,6 +132,16 @@ interface VbenLayoutProps {
    */
   sidebarMixedWidth?: number;
   /**
+   * 是否显示折叠按钮
+   * @default true
+   */
+  sidebarShowCollapseButton?: boolean;
+  /**
+   * 是否显示固定按钮
+   * @default true
+   */
+  sidebarShowFixedButton?: boolean;
+  /**
    * 侧边栏
    * @default dark
    */

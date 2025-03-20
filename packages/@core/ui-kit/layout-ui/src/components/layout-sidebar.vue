@@ -3,6 +3,7 @@ import type { CSSProperties } from 'vue';
 
 import { computed, shallowRef, useSlots, watchEffect } from 'vue';
 
+import { useNamespace } from '@vben-core/composables';
 import { VbenScrollbar } from '@vben-core/shadcn-ui';
 
 import { useScrollLock } from '@vueuse/core';
@@ -64,15 +65,18 @@ interface Props {
    */
   show?: boolean;
   /**
-   * 显示折叠按钮
-   * @default false
+   * 是否显示折叠按钮
+   * @default true
    */
   showCollapseButton?: boolean;
+  /**
+   * 是否显示固定按钮
+   */
+  showFixedButton?: boolean;
   /**
    * 主题
    */
   theme: string;
-
   /**
    * 宽度
    */
@@ -95,10 +99,12 @@ const props = withDefaults(defineProps<Props>(), {
   paddingTop: 0,
   show: true,
   showCollapseButton: true,
+  showFixedButton: true,
   zIndex: 0,
 });
 
 const emit = defineEmits<{ leave: [] }>();
+const { b } = useNamespace('layout');
 const collapse = defineModel<boolean>('collapse');
 const extraCollapse = defineModel<boolean>('extraCollapse');
 const expandOnHovering = defineModel<boolean>('expandOnHovering');
@@ -256,6 +262,7 @@ function handleMouseleave() {
   <aside
     :class="[
       theme,
+      b('sidebar'),
       {
         'bg-sidebar-deep': isSidebarMixed,
         'bg-sidebar border-border border-r': !isSidebarMixed,
@@ -267,14 +274,16 @@ function handleMouseleave() {
     @mouseleave="handleMouseleave"
   >
     <SidebarFixedButton
-      v-if="!collapse && !isSidebarMixed"
+      v-if="showFixedButton && !collapse && !isSidebarMixed"
       v-model:expand-on-hover="expandOnHover"
     />
     <div v-if="slots.logo" :style="headerStyle">
       <slot name="logo"></slot>
     </div>
     <VbenScrollbar :style="contentStyle" shadow shadow-border>
+      <slot name="sidebar-top"></slot>
       <slot></slot>
+      <slot name="sidebar-bottom"></slot>
     </VbenScrollbar>
 
     <div :style="collapseStyle"></div>
@@ -292,12 +301,12 @@ function handleMouseleave() {
       class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
     >
       <SidebarCollapseButton
-        v-if="isSidebarMixed && expandOnHover"
+        v-if="showCollapseButton && isSidebarMixed && expandOnHover"
         v-model:collapsed="extraCollapse"
       />
 
       <SidebarFixedButton
-        v-if="!extraCollapse"
+        v-if="showFixedButton && !extraCollapse"
         v-model:expand-on-hover="expandOnHover"
       />
       <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">

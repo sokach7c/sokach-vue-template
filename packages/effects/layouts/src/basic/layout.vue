@@ -183,6 +183,7 @@ const headerSlots = computed(() => {
     :header-theme="headerTheme"
     :header-toggle-sidebar-button="preferences.widget.sidebarToggle"
     :header-visible="preferences.header.enable"
+    :header-height="preferences.header.height"
     :is-mobile="preferences.app.isMobile"
     :layout="layout"
     :sidebar-collapse="preferences.sidebar.collapsed"
@@ -191,6 +192,8 @@ const headerSlots = computed(() => {
     :sidebar-expand-on-hover="preferences.sidebar.expandOnHover"
     :sidebar-extra-collapse="preferences.sidebar.extraCollapse"
     :sidebar-hidden="preferences.sidebar.hidden"
+    :sidebar-show-collapse-button="preferences.sidebar.showCollapseButton"
+    :sidebar-show-fixed-button="preferences.sidebar.showFixedButton"
     :sidebar-theme="sidebarTheme"
     :sidebar-width="preferences.sidebar.width"
     :tabbar-enable="preferences.tabbar.enable"
@@ -261,6 +264,14 @@ const headerSlots = computed(() => {
           <slot :name="item"></slot>
         </template>
       </LayoutHeader>
+    </template>
+    <!-- 侧边栏顶部区域 -->
+    <template #sidebar-top>
+      <slot name="sidebar-top"></slot>
+    </template>
+    <!-- 侧边栏底部区域 -->
+    <template #sidebar-bottom>
+      <slot name="sidebar-bottom"></slot>
     </template>
     <!-- 侧边菜单区域 -->
     <template #menu>
